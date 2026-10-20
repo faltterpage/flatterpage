@@ -1,0 +1,96 @@
+The device is running!
+
+<Huawei>sys
+Enter system view, return user view with Ctrl+Z.
+[Huawei]sysn SW3
+[SW3]qu
+<SW3>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Now saving the current configuration to the slot 0.
+Sep 29 2026 22:24:50-08:00 SW3 %%01CFM/4/SAVE(l)[0]:The user chose Y when decidi
+ng whether to save the configuration to the device.
+Save the configuration successfully.
+<SW3>dis cu
+#
+sysname SW3
+#
+cluster enable
+ntdp enable
+ndp enable
+#
+drop illegal-mac alarm
+#
+diffserv domain default
+#
+drop-profile default
+#
+aaa
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+ domain default_admin
+ local-user admin password simple admin
+ local-user admin service-type http
+#
+interface Vlanif1
+#
+interface MEth0/0/1
+#
+interface GigabitEthernet0/0/1
+#
+interface GigabitEthernet0/0/2
+#
+interface GigabitEthernet0/0/3
+#
+interface GigabitEthernet0/0/4
+#
+interface GigabitEthernet0/0/5
+#
+interface GigabitEthernet0/0/6
+#
+interface GigabitEthernet0/0/7
+#
+interface GigabitEthernet0/0/8
+#
+interface GigabitEthernet0/0/9
+#
+interface GigabitEthernet0/0/10
+#
+interface GigabitEthernet0/0/11
+#
+interface GigabitEthernet0/0/12
+#
+interface GigabitEthernet0/0/13
+#
+interface GigabitEthernet0/0/14
+#
+interface GigabitEthernet0/0/15
+#
+interface GigabitEthernet0/0/16
+#
+interface GigabitEthernet0/0/17
+#
+interface GigabitEthernet0/0/18
+#
+interface GigabitEthernet0/0/19
+#
+interface GigabitEthernet0/0/20
+#
+interface GigabitEthernet0/0/21
+#
+interface GigabitEthernet0/0/22
+#
+interface GigabitEthernet0/0/23
+#
+interface GigabitEthernet0/0/24
+ stp edged-port enable
+#
+interface NULL0
+#
+user-interface con 0
+user-interface vty 0 4
+#
+return
+<SW3>        

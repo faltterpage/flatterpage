@@ -1,0 +1,154 @@
+The device is running!
+
+<SW1>tracer	
+<SW1>tracert 172.16.0.2
+
+ traceroute to  172.16.0.2(172.16.0.2), max hops: 30 ,packet length: 40,press CT
+RL_C to break 
+
+ 1 1.1.1.2 50 ms  50 ms  40 ms 
+
+ 2 1.1.1.2 20 ms  !N 50 ms  !N 40 ms  !N
+<SW1>dis ip rou
+Route Flags: R - relay, D - download to fib
+------------------------------------------------------------------------------
+Routing Tables: Public
+         Destinations : 9        Routes : 9        
+
+Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface
+
+        0.0.0.0/0   Static  60   0          RD   1.1.1.1         Vlanif2
+        1.1.1.0/29  Direct  0    0           D   1.1.1.5         Vlanif2
+        1.1.1.4/32  Direct  0    0           D   127.0.0.1       Vlanif2
+        1.1.1.5/32  Direct  0    0           D   127.0.0.1       Vlanif2
+      127.0.0.0/8   Direct  0    0           D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0           D   127.0.0.1       InLoopBack0
+    192.168.1.0/24  Direct  0    0           D   192.168.1.2     Vlanif3
+    192.168.1.1/32  Direct  0    0           D   127.0.0.1       Vlanif3
+    192.168.1.2/32  Direct  0    0           D   127.0.0.1       Vlanif3
+
+<SW1> User interface con0 is available
+
+
+
+Please Press ENTER.
+
+<SW1>
+<SW1>
+<SW1>dis cu
+#
+sysname SW1
+#
+vlan batch 2 to 3
+#
+cluster enable
+ntdp enable
+ndp enable
+#
+drop illegal-mac alarm
+#
+dhcp enable
+#
+diffserv domain default
+#
+drop-profile default
+#
+ip pool 1
+ gateway-list 192.168.1.1
+ network 192.168.1.0 mask 255.255.255.0
+ excluded-ip-address 192.168.1.2 192.168.1.3
+ static-bind ip-address 192.168.1.4 mac-address 5489-98d8-6978
+ lease day 30 hour 0 minute 0
+ dns-list 3.3.3.3 3.3.3.4
+#
+aaa
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+ domain default_admin
+ local-user admin password simple admin
+ local-user admin service-type http
+#
+interface Vlanif1
+#
+interface Vlanif2
+ ip address 1.1.1.5 255.255.255.248
+ vrrp vrid 2 virtual-ip 1.1.1.4
+ vrrp vrid 2 priority 120
+ vrrp vrid 2 track interface GigabitEthernet0/0/1 reduced 30
+ vrrp vrid 2 track interface GigabitEthernet0/0/3 reduced 30
+#
+interface Vlanif3
+ ip address 192.168.1.2 255.255.255.0
+ vrrp vrid 3 virtual-ip 192.168.1.1
+ vrrp vrid 3 priority 120
+ vrrp vrid 3 track interface GigabitEthernet0/0/3 reduced 30
+ dhcp select global
+#
+interface MEth0/0/1
+#
+interface GigabitEthernet0/0/1
+ port link-type access
+ port default vlan 2
+#
+interface GigabitEthernet0/0/2
+ port link-type trunk
+ undo port trunk allow-pass vlan 1
+ port trunk allow-pass vlan 2 to 3
+#
+interface GigabitEthernet0/0/3
+ port link-type access
+ port default vlan 3
+#
+interface GigabitEthernet0/0/4
+#
+interface GigabitEthernet0/0/5
+#
+interface GigabitEthernet0/0/6
+#
+interface GigabitEthernet0/0/7
+#
+interface GigabitEthernet0/0/8
+#
+interface GigabitEthernet0/0/9
+#
+interface GigabitEthernet0/0/10
+#
+interface GigabitEthernet0/0/11
+#
+interface GigabitEthernet0/0/12
+#
+interface GigabitEthernet0/0/13
+#
+interface GigabitEthernet0/0/14
+#
+interface GigabitEthernet0/0/15
+#
+interface GigabitEthernet0/0/16
+#
+interface GigabitEthernet0/0/17
+#
+interface GigabitEthernet0/0/18
+#
+interface GigabitEthernet0/0/19
+#
+interface GigabitEthernet0/0/20
+#
+interface GigabitEthernet0/0/21
+#
+interface GigabitEthernet0/0/22
+#
+interface GigabitEthernet0/0/23
+#
+interface GigabitEthernet0/0/24
+#
+interface NULL0
+#
+ip route-static 0.0.0.0 0.0.0.0 1.1.1.1
+#
+user-interface con 0
+user-interface vty 0 4
+#
+return
+<SW1>             

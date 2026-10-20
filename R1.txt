@@ -1,0 +1,232 @@
+return
+[R1-ospf-1]
+Sep 29 2026 22:06:42-08:00 R1 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 7, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+
+[R1-ospf-1]
+[R1-ospf-1]qu
+[R1]dis cu | in route
+ospf 1 router-id 5.5.5.6
+ import-route direct
+ import-route static
+ip route-static 0.0.0.0 0.0.0.0 2.2.2.1
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+[R1]und ip route-static 0.0.0.0 0.0.0.0 2.2.2.1
+[R1]
+Sep 29 2026 22:07:27-08:00 R1 %%01RM/4/IPV4_DEFT_RT_CHG(l)[16]:IPV4 default Rout
+e is changed. (ChangeType=Delete,InstanceId=0,Protocol=Static,ExitIf=GigabitEthe
+rnet0/0/2,Nexthop=2.2.2.1,Neighbour=0.0.0.0,Preference=60,Label=NULL,Metric=0)
+[R1]dis th
+#
+sysname R1
+#
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+#
+return
+[R1]qu
+Sep 29 2026 22:07:32-08:00 R1 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 8, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+<R1>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Sep 29 2026 22:07:33-08:00 R1 %%01CFM/4/SAVE(l)[17]:The user chose Y when decidi
+ng whether to save the configuration to the device.
+Now saving the current configuration to the slot 17.
+Save the configuration successfully.
+<R1>dis cu
+#
+sysname R1
+#
+bridge 1
+#
+aaa
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+ domain default_admin
+ local-user admin password cipher [)*1Xb;Hy6ZypQCee$t3KFU#
+ local-user admin service-type http
+#
+firewall zone Local
+ priority 16
+#
+interface Ethernet0/0/0
+#
+interface Ethernet0/0/1
+#
+interface Serial0/0/0
+ link-protocol ppp
+#
+
+<R1>dis ip rou	
+<R1>dis ip routing-table 
+Route Flags: R - relay, D - download to fib
+------------------------------------------------------------------------------
+Routing Tables: Public
+         Destinations : 13       Routes : 13       
+
+Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface
+
+        1.1.1.0/29  Direct  0    0           D   1.1.1.2         GigabitEthernet
+0/0/1
+        1.1.1.1/32  Direct  0    0           D   127.0.0.1       GigabitEthernet
+0/0/1
+        1.1.1.2/32  Direct  0    0           D   127.0.0.1       GigabitEthernet
+0/0/1
+        2.2.2.0/30  Direct  0    0           D   2.2.2.2         GigabitEthernet
+0/0/2
+        2.2.2.2/32  Direct  0    0           D   127.0.0.1       GigabitEthernet
+0/0/2
+        2.2.2.4/30  OSPF    10   2           D   2.2.2.1         GigabitEthernet
+0/0/2
+        5.5.5.5/32  O_ASE   150  1           D   2.2.2.1         GigabitEthernet
+0/0/2
+        5.5.5.6/32  Direct  0    0           D   127.0.0.1       LoopBack0
+        5.5.5.7/32  O_ASE   150  10          D   2.2.2.1         GigabitEthernet
+0/0/2
+      127.0.0.0/8   Direct  0    0           D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0           D   127.0.0.1       InLoopBack0
+    192.168.1.0/24  Static  60   0          RD   1.1.1.4         GigabitEthernet
+0/0/1
+      202.0.0.0/29  O_ASE   150  1           D   2.2.2.1         GigabitEthernet
+0/0/2
+
+<R1>dis ip routing-table
+Route Flags: R - relay, D - download to fib
+------------------------------------------------------------------------------
+Routing Tables: Public
+         Destinations : 14       Routes : 14       
+
+Destination/Mask    Proto   Pre  Cost      Flags NextHop         Interface
+
+        0.0.0.0/0   O_ASE   150  1           D   2.2.2.1         GigabitEthernet
+0/0/2
+        1.1.1.0/29  Direct  0    0           D   1.1.1.2         GigabitEthernet
+0/0/1
+        1.1.1.1/32  Direct  0    0           D   127.0.0.1       GigabitEthernet
+0/0/1
+        1.1.1.2/32  Direct  0    0           D   127.0.0.1       GigabitEthernet
+0/0/1
+        2.2.2.0/30  Direct  0    0           D   2.2.2.2         GigabitEthernet
+0/0/2
+        2.2.2.2/32  Direct  0    0           D   127.0.0.1       GigabitEthernet
+0/0/2
+        2.2.2.4/30  OSPF    10   2           D   2.2.2.1         GigabitEthernet
+0/0/2
+        5.5.5.5/32  O_ASE   150  1           D   2.2.2.1         GigabitEthernet
+0/0/2
+        5.5.5.6/32  Direct  0    0           D   127.0.0.1       LoopBack0
+        5.5.5.7/32  O_ASE   150  10          D   2.2.2.1         GigabitEthernet
+0/0/2
+      127.0.0.0/8   Direct  0    0           D   127.0.0.1       InLoopBack0
+      127.0.0.1/32  Direct  0    0           D   127.0.0.1       InLoopBack0
+    192.168.1.0/24  Static  60   0          RD   1.1.1.4         GigabitEthernet
+0/0/1
+      202.0.0.0/29  O_ASE   150  1           D   2.2.2.1         GigabitEthernet
+0/0/2
+
+<R1>sys
+Enter system view, return user view with Ctrl+Z.
+[R1]ospf
+[R1-ospf-1]dis th
+#
+ospf 1 router-id 5.5.5.6
+ import-route direct
+ import-route static
+ area 0.0.0.0
+  network 2.2.2.0 0.0.0.3
+#
+return
+[R1-ospf-1]undo im dir
+[R1-ospf-1]
+Sep 29 2026 22:17:02-08:00 R1 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 9, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+[R1-ospf-1]
+[R1-ospf-1]qu
+[R1]dis cu | in route
+ospf 1 router-id 5.5.5.6
+ import-route static
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+[R1]qu
+<R1>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Now saving the current configuration to the slot 17.
+Sep 29 2026 22:22:21-08:00 R1 %%01CFM/4/SAVE(l)[18]:The user chose Y when decidi
+ng whether to save the configuration to the device.
+Save the configuration successfully.
+<R1>
+<R1>
+<R1>
+<R1>dis cu
+#
+sysname R1
+#
+bridge 1
+#
+aaa
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+ domain default_admin
+ local-user admin password cipher [)*1Xb;Hy6ZypQCee$t3KFU#
+ local-user admin service-type http
+#
+firewall zone Local
+ priority 16
+#
+interface Ethernet0/0/0
+#
+interface Ethernet0/0/1
+#
+interface Serial0/0/0
+ link-protocol ppp
+#
+interface Serial0/0/1
+ link-protocol ppp
+#
+interface Serial0/0/2
+ link-protocol ppp
+#
+interface Serial0/0/3
+ link-protocol ppp
+#
+interface GigabitEthernet0/0/0
+ bridge 1
+#
+interface GigabitEthernet0/0/1
+ ip address 1.1.1.2 255.255.255.248
+ vrrp vrid 1 virtual-ip 1.1.1.1
+ vrrp vrid 1 priority 120
+ vrrp vrid 1 track interface GigabitEthernet0/0/2 reduced 30
+#
+interface GigabitEthernet0/0/2
+ ip address 2.2.2.2 255.255.255.252
+#
+interface GigabitEthernet0/0/3
+#
+wlan
+#
+interface NULL0
+#
+interface LoopBack0
+ ip address 5.5.5.6 255.255.255.255
+#
+ospf 1 router-id 5.5.5.6
+ import-route static
+ area 0.0.0.0
+  network 2.2.2.0 0.0.0.3
+#
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+#
+user-interface con 0
+user-interface vty 0 4
+user-interface vty 16 20
+#
+return
+<R1>                       

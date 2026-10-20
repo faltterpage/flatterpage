@@ -1,0 +1,200 @@
+<R2>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Now saving the current configuration to the slot 17.
+Sep 29 2026 21:59:47-08:00 R2 %%01CFM/4/SAVE(l)[1]:The user chose Y when decidin
+g whether to save the configuration to the device.
+Save the configuration successfully.
+<R2>
+Sep 29 2026 22:00:41-08:00 R2 %%01VRRP/4/STATEWARNINGEXTEND(l)[2]:Virtual Router
+ state MASTER changed to BACKUP, because of priority calculation. (Interface=Gig
+abitEthernet0/0/1, VrId=1, InetType=IPv4)
+<R2>
+<R2>sys
+Enter system view, return user view with Ctrl+Z.
+[R2]ip route-static 0.0.0.0 0 2.2.2.5
+[R2]
+Sep 29 2026 22:05:32-08:00 R2 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 4, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+[R2]
+[R2]ospf
+[R2-ospf-1]dis th
+#
+ospf 1 router-id 5.5.5.7
+ import-route static
+ area 0.0.0.0
+  network 2.2.2.4 0.0.0.3
+#
+return
+[R2-ospf-1]im dir
+[R2-ospf-1]dis th
+#
+ospf 1 router-id 5.5.5.7
+ import-route direct
+ import-route static
+ area 0.0.0.0
+  network 2.2.2.4 0.0.0.3
+#
+return
+[R2-ospf-1]
+Sep 29 2026 22:06:52-08:00 R2 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 5, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+[R2-ospf-1]
+[R2-ospf-1]qu
+[R2]dis cu | in route
+ospf 1 router-id 5.5.5.7
+ import-route direct
+ import-route static
+ip route-static 0.0.0.0 0.0.0.0 2.2.2.5
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+[R2]undo ip route-static 0.0.0.0 0.0.0.0 2.2.2.5
+[R2]
+Sep 29 2026 22:07:11-08:00 R2 %%01RM/4/IPV4_DEFT_RT_CHG(l)[3]:IPV4 default Route
+ is changed. (ChangeType=Delete,InstanceId=0,Protocol=Static,ExitIf=GigabitEther
+net0/0/3,Nexthop=2.2.2.5,Neighbour=0.0.0.0,Preference=60,Label=NULL,Metric=0)
+Sep 29 2026 22:07:12-08:00 R2 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 6, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+[R2]
+[R2]qu
+<R2>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Now saving the current configuration to the slot 17.
+Sep 29 2026 22:07:38-08:00 R2 %%01CFM/4/SAVE(l)[4]:The user chose Y when decidin
+g whether to save the configuration to the device.
+Save the configuration successfully.
+<R2>sys
+Enter system view, return user view with Ctrl+Z.
+[R2]ospf
+[R2-ospf-1]dis th
+#
+ospf 1 router-id 5.5.5.7
+ import-route direct
+ import-route static
+ area 0.0.0.0
+  network 2.2.2.4 0.0.0.3
+#
+return
+[R2-ospf-1]im di	
+[R2-ospf-1]im direct co	
+[R2-ospf-1]im direct cost 10
+[R2-ospf-1]im st	
+[R2-ospf-1]im static c 10
+[R2-ospf-1]dis th
+#
+ospf 1 router-id 5.5.5.7
+ import-route direct cost 10
+ import-route static cost 10
+ area 0.0.0.0
+  network 2.2.2.4 0.0.0.3
+#
+return
+[R2-ospf-1]
+Sep 29 2026 22:08:52-08:00 R2 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 8, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+[R2-ospf-1]qu
+[R2]qu
+<R2>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Sep 29 2026 22:09:01-08:00 R2 %%01CFM/4/SAVE(l)[5]:The user chose Y when decidin
+g whether to save the configuration to the device.
+Now saving the current configuration to the slot 17.
+Save the configuration successfully.
+<R2>
+<R2>sys
+Enter system view, return user view with Ctrl+Z.
+[R2]ospf 
+[R2-ospf-1]undo im dir
+[R2-ospf-1]
+Sep 29 2026 22:17:03-08:00 R2 DS/4/DATASYNC_CFGCHANGE:OID 1.3.6.1.4.1.2011.5.25.
+191.3.1 configurations have been changed. The current change number is 9, the ch
+ange loop count is 0, and the maximum number of records is 4095.
+[R2-ospf-1]
+[R2-ospf-1]
+[R2-ospf-1]qu
+[R2]dis cu | in route
+ospf 1 router-id 5.5.5.7
+ import-route static cost 10
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+[R2]qu
+<R2>sa
+The current configuration will be written to the device.
+Are you sure to continue?[Y/N]y
+Now saving the current configuration to the slot 17.
+Sep 29 2026 22:22:10-08:00 R2 %%01CFM/4/SAVE(l)[6]:The user chose Y when decidin
+g whether to save the configuration to the device.
+Save the configuration successfully.
+<R2>
+<R2>
+<R2>dis cu
+#
+sysname R2
+#
+bridge 1
+#
+aaa
+ authentication-scheme default
+ authorization-scheme default
+ accounting-scheme default
+ domain default
+ domain default_admin
+ local-user admin password cipher U%xfOwni,,ajUn1vMEIBXF<#
+ local-user admin service-type http
+#
+firewall zone Local
+ priority 16
+#
+interface Ethernet0/0/0
+#
+interface Ethernet0/0/1
+#
+interface Serial0/0/0
+ link-protocol ppp
+#
+interface Serial0/0/1
+ link-protocol ppp
+#
+interface Serial0/0/2
+ link-protocol ppp
+#
+interface Serial0/0/3
+ link-protocol ppp
+#
+interface GigabitEthernet0/0/0
+ bridge 1
+#
+interface GigabitEthernet0/0/1
+ ip address 1.1.1.3 255.255.255.248
+ vrrp vrid 1 virtual-ip 1.1.1.1
+ vrrp vrid 1 track interface GigabitEthernet0/0/3
+#
+interface GigabitEthernet0/0/2
+#
+interface GigabitEthernet0/0/3
+ ip address 2.2.2.6 255.255.255.252
+#
+wlan
+#
+interface NULL0
+#
+interface LoopBack0
+ ip address 5.5.5.7 255.255.255.255
+#
+ospf 1 router-id 5.5.5.7
+ import-route static cost 10
+ area 0.0.0.0
+  network 2.2.2.4 0.0.0.3
+#
+ip route-static 192.168.1.0 255.255.255.0 1.1.1.4
+#
+user-interface con 0
+user-interface vty 0 4
+user-interface vty 16 20
+#
+return
+<R2>        
